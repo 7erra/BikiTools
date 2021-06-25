@@ -1,0 +1,20 @@
+ [] spawn {
+ 	[<nowiki/>[[uiNamespace]], "OnDisplayRegistered", {
+ 		[[params]] ["_display", "_class"];
+ 		[[if]] (_class == "RscDisplayFunctionsViewer") [[then]] {
+ 			[[systemChat]] "You opened the [[Arma_3:_Functions_Viewer|Functions Viewer]]!";
+ 		};
+ 	}] [[call]] [[BIS_fnc_addScriptedEventHandler]];
+ 	
+ 	[<nowiki/>[[uiNamespace]], "OnDisplayUnregistered", {
+ 		[[params]] ["_display", "_class"];
+ 		[[if]] (_class == "RscDisplayFunctionsViewer") [[then]] {
+ 			[[systemChat]] "You closed the [[Arma_3:_Functions_Viewer|Functions Viewer]]!";
+ 		};
+ 	}] [[call]] [[BIS_fnc_addScriptedEventHandler]];
+ 	
+ 	{{cc|Execute in Eden:}}
+ 	_display = [[findDisplay]] 313 [[createDisplay]] "RscDisplayFunctionsViewer"; {{cc|-> You opened the [[Arma_3:_Functions_Viewer|Functions Viewer]]!}}
+ 	[[uiSleep]] 2;
+ 	_display [[closeDisplay]] 1; {{cc|-> You closed the [[Arma_3:_Functions_Viewer|Functions Viewer]]!}}
+ };

@@ -1,0 +1,24 @@
+﻿player setDamage 1; // setDamage on the player
+becomes
+ [[player]] [[setDamage]] 1; {{cc|setDamage on the player}}
+
+via Tokens:
+[
+	Token.Command { Value: "player" }
+	Token.Unknown { Value: " " }
+	Token.Command { Value: "setDamage" }
+	Token.Unknown { Value: "1;" }
+]
+
+How?
+
+Find all comments:
+player setDamage 1; // setDamage on the player
+                    ^/////////////////////////^
+Find all commands:
+player setDamage 1; // setDamage on the player
+^CCCC^ ^CCCCCCC^       ^CCCCCCC^         ^CCCC^
+
+Don't allow overlaps, comments are higher priority
+player setDamage 1; // setDamage on the player
+^CCCC^ ^CCCCCCC^    ^/////////////////////////^

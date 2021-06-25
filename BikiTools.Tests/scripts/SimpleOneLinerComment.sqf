@@ -1,0 +1,1 @@
+player setDamage 1; // set the damage of the player

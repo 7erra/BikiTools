@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace BikiTools.Tokenizer
+{
+    public class Tokenizer
+    {
+        #region Fields
+        public static readonly Regex RegexUnkown = new(".");
+        public static readonly Regex RegexCommand = new(GenerateCommandRegex(), RegexOptions.IgnoreCase);
+        public static readonly Regex RegexComment = new(@"//.*$");
+        public static readonly Regex RegexWhitespace = new(@"\s");
+        public static readonly Regex RegexSemicolon = new(";");
+        public static readonly Regex RegexNumber = new(@"\b\d+(?:\.\d+)?|\.\d+\b");
+
+        private readonly List<TokenDefinition> _tokenDefinitions = new()
+        {
+            new TokenDefinition(TokenType.Unkown, RegexUnkown, 1),
+            new TokenDefinition(TokenType.Command, RegexCommand),
+            new TokenDefinition(TokenType.Comment, RegexComment),
+            new TokenDefinition(TokenType.Whitespace, RegexWhitespace),
+            new TokenDefinition(TokenType.Semicolon, RegexSemicolon),
+            new TokenDefinition(TokenType.Number, RegexNumber)
+        };
+
+        public const string CommandsFile = "sqf\\commands.txt";
+        #endregion // Fields
+
+        public Tokenizer()
+        {
+            //_tokenDefinitions = (List<TokenDefinition>)_tokenDefinitions.OrderBy(x => x.Priority);
+        }
+
+        #region Methods
+        public static string GenerateCommandRegex()
+        {
+            string[] commands = File.ReadAllLines(CommandsFile);
+            string regexCommand = "\\b(" + string.Join('|', commands) + ")\\b";
+            return regexCommand;
+        }
+
+        private List<TokenMatch> FindTokenMatches(string code)
+        {
+            List<TokenMatch> tokenMatches = new();
+            foreach (TokenDefinition tokenDefinition in _tokenDefinitions)
+            {
+                tokenMatches.AddRange(tokenDefinition.FindMatches(code).ToList());
+            }
+            return tokenMatches;
+        }
+
+        public IEnumerable<DslToken> Tokenize(string code)
+        {
+            List<TokenMatch> tokenMatches = FindTokenMatches(code);
+            List<IGrouping<int, TokenMatch>> groupedByIndex = tokenMatches.GroupBy(x => x.StartIndex)
+                .OrderBy(x => x.Key)
+                .ToList();
+            TokenMatch lastMatch = null;
+            for (int i = 0; i < groupedByIndex.Count; i++)
+            {
+                TokenMatch bestMatch = groupedByIndex[i].OrderBy(x => x.Precedence).First();
+                if (bestMatch.StartIndex < lastMatch?.EndIndex)
+                {
+                    continue;
+                }
+                yield return new DslToken(bestMatch.TokenType, bestMatch.Value);
+                lastMatch = bestMatch;
+            }
+        }
+
+        public string Untokenize(IEnumerable<DslToken> tokens)
+        {
+            return string.Join("", tokens.Select(x => x.Value));
+        }
+        #endregion
+    }
+}
