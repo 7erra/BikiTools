@@ -11,28 +11,31 @@ namespace BikiTools.Tokenizer
         #region Fields
         public static readonly Regex RegexUnkown = new(".");
         public static readonly Regex RegexCommand = new(GenerateCommandRegex(), RegexOptions.IgnoreCase);
-        public static readonly Regex RegexComment = new(@"//.*$");
-        public static readonly Regex RegexWhitespace = new(@"\s");
+        public static readonly Regex RegexComment = new(@"//.*?(?=\r?\n)");
+        public static readonly Regex RegexWhitespace = new(@"\s+");
         public static readonly Regex RegexSemicolon = new(";");
         public static readonly Regex RegexNumber = new(@"\b\d+(?:\.\d+)?|\.\d+\b");
+        public static readonly Regex RegexString = new("\".*\"");
+        public static readonly Regex RegexBIFunction = new(@"\bBIS_fnc_\w+", RegexOptions.IgnoreCase);
+        public static readonly Regex RegexLocalVariable = new(@"\b_\w+");
+        public static readonly Regex RegexCommentMultiLine = new(@"\/\*.*?\*\/", RegexOptions.Singleline);
 
         private readonly List<TokenDefinition> _tokenDefinitions = new()
         {
-            new TokenDefinition(TokenType.Unkown, RegexUnkown, 1),
+            new TokenDefinition(TokenType.Unkown, RegexUnkown, int.MaxValue),
             new TokenDefinition(TokenType.Command, RegexCommand),
-            new TokenDefinition(TokenType.Comment, RegexComment),
+            new TokenDefinition(TokenType.Comment, RegexComment, 2),
             new TokenDefinition(TokenType.Whitespace, RegexWhitespace),
             new TokenDefinition(TokenType.Semicolon, RegexSemicolon),
-            new TokenDefinition(TokenType.Number, RegexNumber)
+            new TokenDefinition(TokenType.Number, RegexNumber),
+            new TokenDefinition(TokenType.String, RegexString, 3),
+            new TokenDefinition(TokenType.BIFunction, RegexBIFunction, 2), // higher than string to link function even when in string
+            new TokenDefinition(TokenType.LocalVariable, RegexLocalVariable),
+            new TokenDefinition(TokenType.CommentMultiLine, RegexCommentMultiLine, 2)
         };
 
         public const string CommandsFile = "sqf\\commands.txt";
         #endregion // Fields
-
-        public Tokenizer()
-        {
-            //_tokenDefinitions = (List<TokenDefinition>)_tokenDefinitions.OrderBy(x => x.Priority);
-        }
 
         #region Methods
         public static string GenerateCommandRegex()
@@ -75,6 +78,6 @@ namespace BikiTools.Tokenizer
         {
             return string.Join("", tokens.Select(x => x.Value));
         }
-        #endregion
+        #endregion Methods
     }
 }

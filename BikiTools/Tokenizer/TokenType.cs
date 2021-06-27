@@ -13,6 +13,10 @@ namespace BikiTools.Tokenizer
         Comment,
         Whitespace,
         Semicolon,
-        Number
+        Number,
+        String,
+        BIFunction,
+        LocalVariable,
+        CommentMultiLine
     }
 }

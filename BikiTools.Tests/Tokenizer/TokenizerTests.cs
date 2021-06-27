@@ -20,14 +20,27 @@ namespace BikiTools.Tokenizer.Tests
     /// Set up a test as follows:
     /// 1) Create a test method that starts with "Tokenize_", eg "Tokenize_SimpleOneliner"
     /// 2) Create an sqf file named like this:  BikiTools.Tests\scripts\SimpleOneliner.sqf
-    /// 3) Test the Tokenizer with the GetActualTokens method
-    /// 4) Manually create a list of correct Tokens
-    /// 5) Compare
+    /// 3) Run the test with the <c>TestExampleScript</c> method
     /// For examples see below
     /// </example>
     [TestClass()]
     public class TokenizerTests
     {
+        #region Values
+        private static int TokenTextMaxWidth
+        {
+            get
+            {
+                Array values = Enum.GetValues(typeof(TokenType));
+                int max = "Token".Length;
+                foreach (var v in values)
+                {
+                    max = Math.Max(v.ToString().Length, max);
+                }
+                return 1;
+            } 
+        }
+        #endregion
         #region Helpers
         private static string LoadSqfFile(string file)
         {
@@ -38,27 +51,45 @@ namespace BikiTools.Tokenizer.Tests
             string file = method.Name["Tokenize_".Length..];
             return LoadSqfFile(file);
         }
-        private static void LogActualTokens(List<TokenType> tokens)
+        private static void LogActualTokens(IEnumerable<DslToken> tokens)
         {
-            Debug.WriteLine("### Actual Tokens ###");
-            foreach (TokenType token in tokens)
+            Debug.WriteLine("\n### Actual Tokens ###");
+            Debug.WriteLine($"{"Token",15} | Value");
+            foreach (DslToken token in tokens)
             {
-                Debug.WriteLine(token);
+                Debug.WriteLine(string.Format("{0,-15} | \"{1}\"", token.TokenType, token.Value.Replace("\r", "\\r").Replace("\n", "\\n").Replace("\t", "\\t")));
             }
-        }
-        private static List<TokenType> GetActualTokens(MethodBase method)
-        {
-            string code = LoadSqfFile(method.Name["Tokenize_".Length..]);
-            Tokenizer tokenizer = new();
-            List<TokenType> actualTokens = tokenizer.Tokenize(code).Select(x => x.TokenType).ToList();
-            LogActualTokens(actualTokens);
-            return actualTokens;
         }
         private void TestExampleScript(MethodBase method)
         {
             string code = LoadSqfFile(method);
+            Debug.WriteLine("### Input ###");
+            Debug.WriteLine(code);
             Tokenizer tokenizer = new();
-            string output = tokenizer.Untokenize(tokenizer.Tokenize(code));
+            IEnumerable<DslToken> tokens = tokenizer.Tokenize(code);
+            LogActualTokens(tokens);
+            string output = tokenizer.Untokenize(tokens);
+            Debug.WriteLine("\n### Output ###");
+            Debug.WriteLine(output);
+            string[] inputLines = code.Split('\n');
+            string[] outputLines = output.Split('\n');
+            for (int i = 0; i < inputLines.Length; i++)
+            {
+                for (int j = 0; j < inputLines[i].Length; j++)
+                {
+                    char charInput = inputLines[i][j];
+                    char charOutput;
+                    try
+                    {
+                        charOutput = outputLines.ElementAtOrDefault(i).ElementAtOrDefault(j);
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        continue;
+                    }
+                    Assert.AreEqual(charInput, charOutput, $"Line: {i + 1}, Char: {j + 1} (Code in: {(int)charInput} | Code out: {(int)charOutput})");
+                }
+            }
             Assert.AreEqual(code, output);
         }
         #endregion
@@ -76,7 +107,7 @@ namespace BikiTools.Tokenizer.Tests
         }
 
         [TestMethod()]
-        public void TokenizerRegex_Commands()
+        public void Regex_Commands()
         {
             Regex r = Tokenizer.RegexCommand;
             string input = File.ReadAllText(Tokenizer.CommandsFile);
@@ -97,6 +128,21 @@ namespace BikiTools.Tokenizer.Tests
 
         [TestMethod()]
         public void Tokenize_SimpleOneLinerComment()
+        {
+            TestExampleScript(GetCurrentMethod());
+        }
+        [TestMethod()]
+        public void Tokenize_Whitespace()
+        {
+            TestExampleScript(GetCurrentMethod());
+        }
+        [TestMethod()]
+        public void Tokenize_uiScriptExample()
+        {
+            TestExampleScript(GetCurrentMethod());
+        }
+        [TestMethod()]
+        public void Tokenize_GeneralDeletion()
         {
             TestExampleScript(GetCurrentMethod());
         }
