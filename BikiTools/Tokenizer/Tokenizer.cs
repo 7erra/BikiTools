@@ -10,7 +10,7 @@ namespace BikiTools.Tokenizer
     {
         #region Fields
         public static readonly Regex RegexUnkown = new(".");
-        public static readonly Regex RegexCommand = new(GenerateCommandRegex(), RegexOptions.IgnoreCase);
+        public static readonly Regex RegexCommand = new(GenerateCommandRegex());
         public static readonly Regex RegexComment = new(@"//.*?(?=\r?\n)");
         public static readonly Regex RegexWhitespace = new(@"\s+");
         public static readonly Regex RegexSemicolon = new(";");
