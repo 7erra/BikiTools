@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikiTools.WPF", "BikiTools.WPF\BikiTools.WPF.csproj", "{4EC450F2-0789-4B29-BCA3-0F772B2406C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikiTools.WPF", "BikiTools.WPF\BikiTools.WPF.csproj", "{4EC450F2-0789-4B29-BCA3-0F772B2406C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikiTools", "BikiTools\BikiTools.csproj", "{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikiTools", "BikiTools\BikiTools.csproj", "{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikiTools.Tests", "BikiTools.Tests\BikiTools.Tests.csproj", "{63FA4997-0B5D-4394-B857-E759A0557ADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikiTools.Tests", "BikiTools.Tests\BikiTools.Tests.csproj", "{63FA4997-0B5D-4394-B857-E759A0557ADD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA18D909-D9AF-49B2-8B29-F72F75CAD88E}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
