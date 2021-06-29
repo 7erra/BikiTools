@@ -32,10 +32,10 @@
                  VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Top"
                  adonisExtensions:CursorSpotlightExtension.RelativeSpotlightSize="0"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
             <RadioButton Content="None" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="True"/>
             <RadioButton Content="&lt;code&gt;" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <RadioButton Content="Space indent" VerticalAlignment="Center"/>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </adonisControls:AdonisWindow>
