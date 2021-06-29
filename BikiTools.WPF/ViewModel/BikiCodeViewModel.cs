@@ -2,6 +2,7 @@
 using BikiTools.Tokenizer;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace BikiTools.ViewModel
 {
@@ -35,7 +36,9 @@ namespace BikiTools.ViewModel
                     }
                     newTokens.Add(t);
                 }
-                Output = BikiCodeTokenizer.Untokenize(newTokens);
+                string codeFormatted = BikiCodeTokenizer.Untokenize(newTokens);
+                codeFormatted = Regex.Replace(codeFormatted, @"^", " ", RegexOptions.Multiline);
+                Output = codeFormatted;
 
                 SetProperty(ref input, value);
             }
