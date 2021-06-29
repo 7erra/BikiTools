@@ -60,15 +60,20 @@ namespace BikiTools.Tokenizer.Tests
                 Debug.WriteLine(string.Format("{0,-15} | \"{1}\"", token.TokenType, token.Value.Replace("\r", "\\r").Replace("\n", "\\n").Replace("\t", "\\t")));
             }
         }
-        private void TestExampleScript(MethodBase method)
+        private static void TestExampleScript(MethodBase method, List<TokenType> expectedTokens = null)
         {
             string code = LoadSqfFile(method);
             Debug.WriteLine("### Input ###");
             Debug.WriteLine(code);
-            Tokenizer tokenizer = new();
+            BikiCodeTokenizer tokenizer = new(code);
             IEnumerable<DslToken> tokens = tokenizer.Tokenize(code);
             LogActualTokens(tokens);
-            string output = tokenizer.Untokenize(tokens);
+            if (expectedTokens != null)
+            {
+                // Compare the received tokens
+                CollectionAssert.AreEqual(expectedTokens, tokens.Select(x => x.TokenType).ToList());
+            }
+            string output = tokenizer.Untokenize();
             Debug.WriteLine("\n### Output ###");
             Debug.WriteLine(output);
             string[] inputLines = code.Split('\n');
@@ -99,7 +104,7 @@ namespace BikiTools.Tokenizer.Tests
         public void GenerateCommandRegexTest()
         {
             // Arrange
-            string commandRegex = Tokenizer.GenerateCommandRegex();
+            string commandRegex = BikiCodeTokenizer.GenerateCommandRegex();
             // Act
             // Assert
             Debug.WriteLine(commandRegex);
@@ -109,9 +114,9 @@ namespace BikiTools.Tokenizer.Tests
         [TestMethod()]
         public void Regex_Commands()
         {
-            Regex r = Tokenizer.RegexCommand;
-            string input = File.ReadAllText(Tokenizer.CommandsFile);
-            int lineCount = File.ReadAllLines(Tokenizer.CommandsFile).Length;
+            Regex r = BikiCodeTokenizer.RegexCommand;
+            string input = File.ReadAllText(BikiCodeTokenizer.CommandsFile);
+            int lineCount = File.ReadAllLines(BikiCodeTokenizer.CommandsFile).Length;
 
             var matches = r.Matches(input);
 
@@ -129,7 +134,18 @@ namespace BikiTools.Tokenizer.Tests
         [TestMethod()]
         public void Tokenize_SimpleOneLinerComment()
         {
-            TestExampleScript(GetCurrentMethod());
+            List<TokenType> expectedTokenTypes = new()
+            {
+                TokenType.Command,
+                TokenType.Whitespace,
+                TokenType.Command,
+                TokenType.Whitespace,
+                TokenType.Number,
+                TokenType.Semicolon,
+                TokenType.Whitespace,
+                TokenType.Comment
+            };
+            TestExampleScript(GetCurrentMethod(), expectedTokenTypes);
         }
         [TestMethod()]
         public void Tokenize_Whitespace()

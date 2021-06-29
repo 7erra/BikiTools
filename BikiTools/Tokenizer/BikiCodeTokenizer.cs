@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace BikiTools.Tokenizer
 {
-    public class Tokenizer
+    public class BikiCodeTokenizer
     {
-        #region Fields
+        #region Properties
         public static readonly Regex RegexUnkown = new(".");
         public static readonly Regex RegexCommand = new(GenerateCommandRegex());
-        public static readonly Regex RegexComment = new(@"//.*?(?=\r?\n)");
+        public static readonly Regex RegexComment = new(@"\/\/.*?(?=\r?$)", RegexOptions.Multiline); // bullshit
         public static readonly Regex RegexWhitespace = new(@"\s+");
         public static readonly Regex RegexSemicolon = new(";");
         public static readonly Regex RegexNumber = new(@"\b\d+(?:\.\d+)?|\.\d+\b");
@@ -35,7 +35,14 @@ namespace BikiTools.Tokenizer
         };
 
         public const string CommandsFile = "sqf\\commands.txt";
-        #endregion // Fields
+
+        public IEnumerable<DslToken> Tokens { get; set; }
+        #endregion // Properties
+
+        public BikiCodeTokenizer(string code)
+        {
+            Tokens = Tokenize(code);
+        }
 
         #region Methods
         public static string GenerateCommandRegex()
@@ -74,7 +81,11 @@ namespace BikiTools.Tokenizer
             }
         }
 
-        public string Untokenize(IEnumerable<DslToken> tokens)
+        public string Untokenize()
+        {
+            return Untokenize(Tokens);
+        }
+        public static string Untokenize(IEnumerable<DslToken> tokens)
         {
             return string.Join("", tokens.Select(x => x.Value));
         }
