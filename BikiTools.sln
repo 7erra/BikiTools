@@ -15,24 +15,46 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "BikiTools.Installer", "BikiTools.Installer\BikiTools.Installer.wixproj", "{B990BF2F-B1C4-4480-8BA0-97A2E734124C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Debug|x86.Build.0 = Debug|Any CPU
 		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Release|x86.ActiveCfg = Release|Any CPU
+		{4EC450F2-0789-4B29-BCA3-0F772B2406C2}.Release|x86.Build.0 = Release|Any CPU
 		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Debug|x86.Build.0 = Debug|Any CPU
 		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{25500EF6-63E7-49CF-B1E8-0D1755A93AB3}.Release|x86.Build.0 = Release|Any CPU
 		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Debug|x86.Build.0 = Debug|Any CPU
 		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Release|x86.ActiveCfg = Release|Any CPU
+		{63FA4997-0B5D-4394-B857-E759A0557ADD}.Release|x86.Build.0 = Release|Any CPU
+		{B990BF2F-B1C4-4480-8BA0-97A2E734124C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B990BF2F-B1C4-4480-8BA0-97A2E734124C}.Debug|x86.ActiveCfg = Debug|x86
+		{B990BF2F-B1C4-4480-8BA0-97A2E734124C}.Debug|x86.Build.0 = Debug|x86
+		{B990BF2F-B1C4-4480-8BA0-97A2E734124C}.Release|Any CPU.ActiveCfg = Release|x86
+		{B990BF2F-B1C4-4480-8BA0-97A2E734124C}.Release|x86.ActiveCfg = Release|x86
+		{B990BF2F-B1C4-4480-8BA0-97A2E734124C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

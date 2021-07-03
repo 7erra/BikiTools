@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir1ABD1A10CC869E89632C1E934D9A7046" Name="ref" />
+            <Directory Id="dirB699B779DD859CB7CAD46DA4BC9017C0" Name="runtimes" />
+            <Directory Id="dirC75B2B6B4B3D46F280FCE79BC801BDD6" Name="sqf" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="BikiToolsCG">
+            <Component Id="cmpE778BF9619A9AAA25DF39C2A3E864EE4" Directory="INSTALLDIR" Guid="{C0A51752-ADDB-4A64-AC7F-B3C449A80101}">
+                <File Id="fil08CEF33546E41B1379F614BBA917F548" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\AdonisUI.ClassicTheme.dll" />
+            </Component>
+            <Component Id="cmp634DA4D66234CA3120431A17CAD94995" Directory="INSTALLDIR" Guid="{EA0D10BE-DA27-4356-A80B-2D6D302D8E20}">
+                <File Id="filCC26DC6BC8697C9836E0135E924BE1A0" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\AdonisUI.dll" />
+            </Component>
+            <Component Id="cmpDD1253BF4C5B50EE3710FC3E8F55C39A" Directory="INSTALLDIR" Guid="{269751DD-A004-4205-B9AC-D0524BAE4EF6}">
+                <File Id="fil750DF35AEA95B99881D5D6E6035B8E9F" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.dll" />
+            </Component>
+            <Component Id="cmpC91B3E9CA79A388F07BA3736E51ABED8" Directory="INSTALLDIR" Guid="{FC4C788C-8BF7-4202-BC4D-ADC2E24F59CB}">
+                <File Id="fil214CC7F8F7F0E7CF17A8FE838F8AA18C" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.pdb" />
+            </Component>
+            <Component Id="cmp2682E77FA0A923CA2EE67DE1DFF1095F" Directory="INSTALLDIR" Guid="{2B053749-5112-4797-87B4-B8AB36F941D0}">
+                <File Id="fil895D637EAE1821063159E9398B372190" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.WPF.deps.json" />
+            </Component>
+            <Component Id="cmp69A8D5D4623DCDA8D724D2B46F6510DF" Directory="INSTALLDIR" Guid="{31F96AEC-0142-4CA8-990B-005332EEFBE0}">
+                <File Id="fil29413EA8AC853F48C002CE4C2DF1A399" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.WPF.dll" />
+            </Component>
+            <Component Id="cmpAA5CDB6195C1BC1820F87070D975CB89" Directory="INSTALLDIR" Guid="{CFE0D313-AF0C-47C3-B4D9-E32B126FCFE9}">
+                <File Id="filE7F8B181B9D5B5D9DD40DEE6FB2203C0" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.WPF.exe" />
+            </Component>
+            <Component Id="cmp37081F9DB9FF2C4577992ECEA184419C" Directory="INSTALLDIR" Guid="{83A85FDA-A02B-4F3E-B60B-6A7965023961}">
+                <File Id="filDEBE4F235498216A77600F5BC304A906" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.WPF.pdb" />
+            </Component>
+            <Component Id="cmpE7521F209CA26FEEDEB130C7C94D5077" Directory="INSTALLDIR" Guid="{C604E6C3-FC05-4801-B41B-CCACF31A3771}">
+                <File Id="fil44CC61802FFC83E68EBE7BFBB6DD4D2A" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.WPF.runtimeconfig.dev.json" />
+            </Component>
+            <Component Id="cmp53637DB263686829B91C93A4AB68BC34" Directory="INSTALLDIR" Guid="{4F908CFE-5C86-43D4-85EA-5E8EDB53A042}">
+                <File Id="filCA8EBE88A118BADB6152E059EB99A796" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\BikiTools.WPF.runtimeconfig.json" />
+            </Component>
+            <Component Id="cmp9A24AFDE37B632858E87B4C850A598A8" Directory="INSTALLDIR" Guid="{E141666E-682A-455A-9CD6-835E1C581A96}">
+                <File Id="filD2C60ABCC565F160375136344E412C0E" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\Microsoft.Toolkit.Mvvm.dll" />
+            </Component>
+            <Component Id="cmp03637CBBBBBBDE7AD30868DD3BE68B72" Directory="INSTALLDIR" Guid="{CF988C01-4227-4895-BEE1-77A882668AA8}">
+                <File Id="filAA085C60B5E18E998DD62FB27E2F7F5F" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\System.Drawing.Common.dll" />
+            </Component>
+            <Component Id="cmp06AF86DE164328514551DCDE9A82D3EE" Directory="dir1ABD1A10CC869E89632C1E934D9A7046" Guid="{927ED6E9-81DF-4C73-BCB0-099E792115C8}">
+                <File Id="fil0AA64958618F0DF05535D4BDF7C22662" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\ref\BikiTools.WPF.dll" />
+            </Component>
+            <Component Id="cmpE850713B9736BC2F095A227F35C0C8A5" Directory="dir35BE547322C1A468B05FADA0110F0391" Guid="{336D4AA0-92DD-41E5-84DE-CF42D5062447}">
+                <File Id="fil455E30B86C09815E6099ACE86B6BDA60" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll" />
+            </Component>
+            <Component Id="cmp7D552C218A9A109F4891539BB413230F" Directory="dir3B1C93648EC247824476983EA333E860" Guid="{ADF6F089-9C14-4E4C-A406-AC5018FC8197}">
+                <File Id="fil1E32FB038438C6C16D52D60E50EEEA98" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll" />
+            </Component>
+            <Component Id="cmp6EB61EDFAE9180FD06733398E4E69DC2" Directory="dirC75B2B6B4B3D46F280FCE79BC801BDD6" Guid="{04620F54-B7D4-4BA4-9E5F-14AEEA56FB85}">
+                <File Id="fil18CD340B4E8D4C50267A31AA880B1783" KeyPath="yes" Source="$(var.BikiTools.WPF.TargetDir)\sqf\commands.txt" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir2C3E5AEEB2F7196C5A6FEEA1F79147DA" Name="win" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6C30D04BD96F620328AC9AAA5E4B0F9B">
+            <Directory Id="dir35BE547322C1A468B05FADA0110F0391" Name="netcoreapp3.0" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirF78421D30AE78B84FBB1AF80F70209FC">
+            <Directory Id="dir3B1C93648EC247824476983EA333E860" Name="netcoreapp3.0" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir7D751612140E64D275382A8E09372899">
+            <Directory Id="dir6C30D04BD96F620328AC9AAA5E4B0F9B" Name="lib" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dir7D751612140E64D275382A8E09372899" Name="unix" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2C3E5AEEB2F7196C5A6FEEA1F79147DA">
+            <Directory Id="dirF78421D30AE78B84FBB1AF80F70209FC" Name="lib" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

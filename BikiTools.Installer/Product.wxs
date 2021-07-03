@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Name="BIKI Tools"
+           Id="*"
+           UpgradeCode="78de0749-7fd3-4669-b4e7-e91a7f8d4e84"
+           Language="1033"
+           Codepage="1252"
+           Version="1.0.0.0"
+           Manufacturer="Terra">
+
+    <Package Id="*"
+             Keywords="Arma,Wiki,Mediawiki,Bohemia"
+             Description="Tool to bring sqf code to the Bohemia Interactive Community Wiki."
+             Comments="A commnutiy made utility"
+             Manufacturer="Terra"
+             InstallerVersion="100"
+             Languages="1033"
+             Compressed="yes"
+             SummaryCodepage="1252" />
+
+    <Media Id="1"
+           Cabinet="Sample.cab"
+           EmbedCab="yes"/>
+    
+    <Directory Id="TARGETDIR"
+               Name="SourceDir">
+      <Directory Id="ProgramFilesFolder"
+                 Name="PFiles">
+        <Directory Id="INSTALLDIR"
+                   Name="BIKI Tools"/>
+      <!-- Generate files with:
+           heat dir ..\BikiTools.WPF\bin\Release\net5.0-windows -var var.BikiTools.WPF.TargetDir -cg BikiToolsCG -gg -sreg -srd -dr INSTALLDIR -o BikiToolsFragments.wxs -->
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder"
+                 Name="Programs">
+        <Directory Id="ProgramMenuDir"
+                   Name="BIKI Tools">
+          <Component Id="ProgramMenuDir"
+                     Guid="{534DFED5-BDF6-4382-ABB1-2AF963B0DD92}">
+            <RemoveFolder Id="ProgramMenuDir"
+                          On="uninstall"/>
+            <RegistryValue Root="HKCU"
+                           Key="Software\[Manufacturer]\[ProductName]"
+                           Type="string"
+                           Value=""
+                           KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+      
+      <Directory Id="DesktopFolder"
+                 Name="Desktop" />
+    </Directory>
+    
+    <Feature Id="Complete"
+             Level="1">
+      <ComponentRef Id="ProgramMenuDir" />
+      <ComponentGroupRef Id="BikiToolsCG" />
+    </Feature>
+  </Product>
+</Wix>
