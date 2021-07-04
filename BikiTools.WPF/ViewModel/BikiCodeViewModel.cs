@@ -22,8 +22,18 @@ namespace BikiTools.ViewModel
             get => input;
             set
             {
+                bool changed = SetProperty(ref input, value);
+                if (changed) OnPropertyChanged(nameof(Output));
+            }
+        }
+
+        public string Output
+        {
+            get
+            {
                 // Tokenize
-                BikiCodeTokenizer tokenizer = new(value);
+                if (Input == null) return "";
+                BikiCodeTokenizer tokenizer = new(Input);
                 List<DslToken> newTokens = new();
                 foreach (DslToken t in tokenizer.Tokens)
                 {
@@ -46,17 +56,8 @@ namespace BikiTools.ViewModel
                 {
                     codeFormatted = "<code>" + codeFormatted + "</code>";
                 }
-                Output = codeFormatted;
-
-                _ = SetProperty(ref input, value);
+                return codeFormatted;
             }
-        }
-
-        private string output;
-        public string Output
-        {
-            get => output;
-            set => SetProperty(ref output, value);
         }
 
         private HighlightOptions selectedHighlightOption;
@@ -66,7 +67,8 @@ namespace BikiTools.ViewModel
             get => selectedHighlightOption;
             set
             {
-                SetProperty(ref selectedHighlightOption, value);
+                bool changed = SetProperty(ref selectedHighlightOption, value);
+                if (changed) OnPropertyChanged(nameof(Output));
             }
         }
     }
