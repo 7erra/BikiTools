@@ -6,6 +6,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Terra</Authors>
     <Product>BIKI Tools</Product>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
