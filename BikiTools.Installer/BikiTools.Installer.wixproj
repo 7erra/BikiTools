@@ -44,7 +44,7 @@
     <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>heat dir $(SolutionDir)BikiTools.WPF\bin\$(ConfigurationName)\net5.0-windows -var var.BikiTools.WPF.TargetDir -cg BikiToolsCG -gg -sreg -srd -dr INSTALLDIR -o $(ProjectDir)BikiToolsFragments.wxs</PreBuildEvent>
+    <PreBuildEvent>heat dir $(SolutionDir)BikiTools.WPF\bin\$(ConfigurationName)\net5.0-windows -var var.BikiTools.WPF.TargetDir -ag -cg BikiToolsCG -sreg -srd -dr INSTALLDIR -o $(ProjectDir)BikiToolsFragments.wxs</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
