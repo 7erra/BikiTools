@@ -6,14 +6,15 @@ using System.Text.RegularExpressions;
 
 namespace BikiTools.ViewModel
 {
+    public enum HighlightOptions
+    {
+        None,
+        CodeTag,
+        SpaceIndent
+    }
+
     public class BikiCodeViewModel : ObservableObject
     {
-        public enum RadioButtons
-        {
-            None,
-            CodeTag,
-            SpaceIndent
-        }
 
         private string input;
         public string Input
@@ -21,12 +22,22 @@ namespace BikiTools.ViewModel
             get => input;
             set
             {
+                bool changed = SetProperty(ref input, value);
+                if (changed) OnPropertyChanged(nameof(Output));
+            }
+        }
+
+        public string Output
+        {
+            get
+            {
                 // Tokenize
-                BikiCodeTokenizer tokenizer = new(value);
+                if (Input == null) return "";
+                BikiCodeTokenizer tokenizer = new(Input);
                 List<DslToken> newTokens = new();
                 foreach (DslToken t in tokenizer.Tokens)
                 {
-                    if (t.TokenType == TokenType.Command || t.TokenType == TokenType.BIFunction)
+                    if (t.TokenType is TokenType.Command or TokenType.BIFunction)
                     {
                         t.Value = "[[" + t.Value + "]]";
                     }
@@ -37,18 +48,28 @@ namespace BikiTools.ViewModel
                     newTokens.Add(t);
                 }
                 string codeFormatted = BikiCodeTokenizer.Untokenize(newTokens);
-                codeFormatted = Regex.Replace(codeFormatted, @"^", " ", RegexOptions.Multiline);
-                Output = codeFormatted;
-
-                SetProperty(ref input, value);
+                if (SelectedHighlightOption == HighlightOptions.SpaceIndent)
+                {
+                    codeFormatted = Regex.Replace(codeFormatted, @"^", " ", RegexOptions.Multiline);
+                }
+                else if (SelectedHighlightOption == HighlightOptions.CodeTag)
+                {
+                    codeFormatted = "<code>" + codeFormatted + "</code>";
+                }
+                return codeFormatted;
             }
         }
 
-        private string output;
-        public string Output
+        private HighlightOptions selectedHighlightOption;
+
+        public HighlightOptions SelectedHighlightOption
         {
-            get => output;
-            set => SetProperty(ref output, value);
+            get => selectedHighlightOption;
+            set
+            {
+                bool changed = SetProperty(ref selectedHighlightOption, value);
+                if (changed) OnPropertyChanged(nameof(Output));
+            }
         }
     }
 }

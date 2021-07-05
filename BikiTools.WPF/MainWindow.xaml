@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:BikiTools.ViewModel"
+        xmlns:conv="clr-namespace:BikiTools.WPF.Converter"
         xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
         mc:Ignorable="d"
@@ -12,6 +13,9 @@
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
     </Window.Style>
+    <Window.Resources>
+        <conv:HighlightOptionConverter x:Key="highlighOptionConverter" />
+    </Window.Resources>
     <Window.DataContext>
         <vm:BikiCodeViewModel x:Name="BikiCodeVM"/>
     </Window.DataContext>
@@ -32,10 +36,13 @@
                  VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Top"
                  adonisExtensions:CursorSpotlightExtension.RelativeSpotlightSize="0"/>
 
-        <!--<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
-            <RadioButton Content="None" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="True"/>
-            <RadioButton Content="&lt;code&gt;" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <RadioButton Content="Space indent" VerticalAlignment="Center"/>
-        </StackPanel>-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
+            <RadioButton Content="None" VerticalAlignment="Center" Margin="0,0,10,0" 
+                         IsChecked="{Binding SelectedHighlightOption, Converter={StaticResource highlighOptionConverter}, ConverterParameter={x:Static vm:HighlightOptions.None}}"/>
+            <RadioButton Content="&lt;code&gt;" VerticalAlignment="Center" Margin="0,0,10,0"
+                         IsChecked="{Binding SelectedHighlightOption, Converter={StaticResource highlighOptionConverter}, ConverterParameter={x:Static vm:HighlightOptions.CodeTag}}"/>
+            <RadioButton Content="Space indent" VerticalAlignment="Center"
+                         IsChecked="{Binding SelectedHighlightOption, Converter={StaticResource highlighOptionConverter}, ConverterParameter={x:Static vm:HighlightOptions.SpaceIndent}}"/>
+        </StackPanel>
     </Grid>
 </adonisControls:AdonisWindow>
