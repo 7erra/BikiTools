@@ -1,9 +1,12 @@
 # BIKI Tools
-![alt text](.github/Media/Screenshot_2021-07-04_131540.png)<br/>
+![alt text](.github/Media/Screenshot.png)<br/>
 The BIKI (Bohemia Interactive Commnunity Wiki) is a Mediawiki based wiki about games from Bohemia Interactive, most notably the Arma series. The sqf language is the coding language of this game series. This tool was written to bring sqf scripts to the BIKI by automatically formatting the code. Current features are:
 - Linking sqf commands
 - Applying the {{cc|}} template for single line comments
-- Adding a space in front of each line so it is rendered as code
+- Choosing one of the following options to add code highlighting:
+  - None
+  - code tags
+  - Space indent
 
 ## Installation
 ### For Users
