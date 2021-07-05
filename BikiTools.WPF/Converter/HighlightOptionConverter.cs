@@ -14,7 +14,6 @@ namespace BikiTools.WPF.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Debug.WriteLine($"Value: {value}, Parameter: {parameter}");
             return value.Equals(parameter);
         }
 
