@@ -15,18 +15,22 @@ namespace BikiTools.ViewModel
 
     public class BikiCodeViewModel : ObservableObject
     {
-
         private string input;
         public string Input
         {
             get => input;
             set
             {
-                bool changed = SetProperty(ref input, value);
-                if (changed) OnPropertyChanged(nameof(Output));
+                if (SetProperty(ref input, value))
+                {
+                    OnPropertyChanged(nameof(Output));
+                }
             }
         }
 
+        /// <summary>
+        /// Formatted input with added Mediawiki highlighting.
+        /// </summary>
         public string Output
         {
             get
@@ -67,8 +71,10 @@ namespace BikiTools.ViewModel
             get => selectedHighlightOption;
             set
             {
-                bool changed = SetProperty(ref selectedHighlightOption, value);
-                if (changed) OnPropertyChanged(nameof(Output));
+                if (SetProperty(ref selectedHighlightOption, value))
+                {
+                    OnPropertyChanged(nameof(Output));
+                }
             }
         }
     }

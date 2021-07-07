@@ -10,6 +10,12 @@ using System.Windows.Data;
 
 namespace BikiTools.WPF.Converter
 {
+    /// <summary>
+    /// Data binding between a selected property and a radio button.
+    /// </summary>
+    /// <remarks>
+    /// https://stackoverflow.com/a/20730096
+    /// </remarks>
     public class HighlightOptionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
