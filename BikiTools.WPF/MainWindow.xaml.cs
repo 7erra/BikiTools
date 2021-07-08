@@ -1,6 +1,8 @@
 ﻿using AdonisUI.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,21 @@ namespace BikiTools.WPF
             TextBox otherTextBox = sender == TxtInput ? TxtOutput : TxtInput;
             otherTextBox.ScrollToVerticalOffset(e.VerticalOffset);
             otherTextBox.ScrollToHorizontalOffset(e.HorizontalOffset);
+        }
+
+        private void TxtInput_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+            if (System.IO.Path.GetExtension(file) == ".sqf")
+            {
+                e.Handled = true;
+            };
+        }
+
+        private void TxtInput_Drop(object sender, DragEventArgs e)
+        {
+            string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+            TxtInput.Text = $"{File.ReadAllText(file)}";
         }
     }
 }
