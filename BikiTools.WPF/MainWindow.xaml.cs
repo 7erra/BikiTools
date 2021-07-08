@@ -1,7 +1,9 @@
 ﻿using AdonisUI.Controls;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BikiTools.WPF
 {
@@ -34,6 +36,12 @@ namespace BikiTools.WPF
         {
             string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
             TxtInput.Text = $"{File.ReadAllText(file)}";
+        }
+
+        private void TxtInput_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Select(tb.SelectionStart, tb.SelectedText.Trim().Length);
         }
     }
 }
