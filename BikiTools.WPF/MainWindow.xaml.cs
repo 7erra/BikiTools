@@ -24,7 +24,7 @@ namespace BikiTools.WPF
         private void TxtInput_PreviewDragOver(object sender, DragEventArgs e)
         {
             string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
-            if (System.IO.Path.GetExtension(file) == ".sqf")
+            if (Path.GetExtension(file) == ".sqf")
             {
                 e.Handled = true;
             };
