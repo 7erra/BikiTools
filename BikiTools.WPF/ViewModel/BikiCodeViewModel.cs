@@ -1,8 +1,13 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using BikiTools.Tokenizer;
+﻿using BikiTools.Tokenizer;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BikiTools.ViewModel
 {
@@ -43,7 +48,7 @@ namespace BikiTools.ViewModel
                 {
                     if (t.TokenType is TokenType.Command or TokenType.BIFunction)
                     {
-                        t.Value = "[[" + t.Value + "]]";
+                        t.Value = $"[[{t.Value}]]";
                     }
                     else if (t.TokenType == TokenType.Comment)
                     {
