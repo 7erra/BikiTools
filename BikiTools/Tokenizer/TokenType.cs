@@ -17,6 +17,7 @@ namespace BikiTools.Tokenizer
         String,
         BIFunction,
         LocalVariable,
-        CommentMultiLine
+        CommentMultiLine,
+        EqualSign
     }
 }

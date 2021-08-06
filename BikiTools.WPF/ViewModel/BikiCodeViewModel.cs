@@ -45,6 +45,10 @@ namespace BikiTools.ViewModel
                     {
                         t.Value = "{{cc|" + t.Value.Replace("//", "").Trim() + "}}";
                     }
+                    else if (t.TokenType == TokenType.EqualSign && UseEqualSignTemplate)
+                    {
+                        t.Value = "{{" + t.Value + "}}";
+                    }
                     newTokens.Add(t);
                 }
                 string codeFormatted = BikiCodeTokenizer.Untokenize(newTokens);
@@ -71,5 +75,18 @@ namespace BikiTools.ViewModel
                 if (changed) OnPropertyChanged(nameof(Output));
             }
         }
+
+        private bool useEqualSignTemplate;
+
+        public bool UseEqualSignTemplate
+        {
+            get => useEqualSignTemplate;
+            set
+            {
+                bool changed = SetProperty(ref useEqualSignTemplate, value);
+                if (changed) OnPropertyChanged(nameof(Output));
+            }
+        }
+
     }
 }

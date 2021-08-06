@@ -19,6 +19,7 @@ namespace BikiTools.Tokenizer
         public static readonly Regex RegexBIFunction = new(@"\bBIS_fnc_\w+", RegexOptions.IgnoreCase);
         public static readonly Regex RegexLocalVariable = new(@"\b_\w+");
         public static readonly Regex RegexCommentMultiLine = new(@"\/\*.*?\*\/", RegexOptions.Singleline);
+        public static readonly Regex RegexEqualSign = new(@"=");
 
         private readonly List<TokenDefinition> _tokenDefinitions = new()
         {
@@ -31,7 +32,8 @@ namespace BikiTools.Tokenizer
             new TokenDefinition(TokenType.String, RegexString, 3),
             new TokenDefinition(TokenType.BIFunction, RegexBIFunction, 2), // higher than string to link function even when in string
             new TokenDefinition(TokenType.LocalVariable, RegexLocalVariable),
-            new TokenDefinition(TokenType.CommentMultiLine, RegexCommentMultiLine, 2)
+            new TokenDefinition(TokenType.CommentMultiLine, RegexCommentMultiLine, 2),
+            new TokenDefinition(TokenType.EqualSign, RegexEqualSign)
         };
 
         public const string CommandsFile = "sqf\\commands.txt";
